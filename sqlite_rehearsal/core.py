@@ -123,8 +123,6 @@ def rehearse(database: Path | str, migrations: list[Path | str], *, timeout: flo
                     except sqlite3.Error as exc:
                         step['error'] = str(exc)
                         report['issues'].append(f'migration failed: {name}')
-                    finally:
-                        db.set_authorizer(None)
                     step['duration_ms'] = round((time.monotonic() - start) * 1000, 3)
                     if 'error' in step:
                         report['steps'].append(step)
