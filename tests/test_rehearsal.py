@@ -39,6 +39,11 @@ class RehearsalTests(unittest.TestCase):
         self.assertFalse(r['ok'])
         self.assertEqual(r['steps'][0]['changes']['rows'][0]['delta'], -1)
 
+    def test_sqlite_prefix_user_table_included(self):
+        r = rehearse(self.db, [self.sql('CREATE TABLE sqliteXdata(x); INSERT INTO sqliteXdata VALUES(1);')])
+        self.assertTrue(r['ok'])
+        self.assertEqual(r['steps'][0]['changes']['rows'][0]['table'], 'sqliteXdata')
+
     def test_drop_table(self):
         r = rehearse(self.db, [self.sql('DROP TABLE tasks;')], fail_on_row_loss=True)
         self.assertFalse(r['ok'])

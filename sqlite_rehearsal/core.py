@@ -21,7 +21,7 @@ def snapshot(db: sqlite3.Connection) -> dict:
         f'{kind}:{name}': {'type': kind, 'name': name, 'table': table, 'sql': sql}
         for kind, name, table, sql in db.execute(
             "SELECT type,name,tbl_name,sql FROM sqlite_schema "
-            "WHERE name NOT LIKE 'sqlite_%' ORDER BY type,name"
+            "WHERE substr(name,1,7) != 'sqlite_' ORDER BY type,name"
         )
     }
     counts = {
