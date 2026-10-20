@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sqlite-rehearsal"
+version = "0.1.0"
+description = "Rehearse SQLite migrations on a disposable snapshot and inspect their effects"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+readme = "README.md"
+authors = [{name = "Nithinfgs"}]
+dependencies = []
+
+[project.scripts]
+sqlite-rehearsal = "sqlite_rehearsal.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["sqlite_rehearsal*"]
